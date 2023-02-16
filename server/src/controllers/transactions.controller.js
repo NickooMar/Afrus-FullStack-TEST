@@ -8,31 +8,31 @@ import { pool } from "../db/dbConnection.js";
 export const addBuys = async (req, res) => {
     const { idComprador, idProducto, precioPagado, impuesto, impuestoMonto } = req.body;
 
-    try {
-        if(!idComprador || !idProducto || !precioPagado || !impuesto || !impuestoMonto || typeof idComprador !== "number" || typeof idProducto !== "number" || typeof precioPagado !== "number" || typeof impuestoMonto !== "number") throw new Error("Proporcionar los datos correctos")
+    // try {
+    //     if(!idComprador || !idProducto || !precioPagado || !impuesto || !impuestoMonto || typeof idComprador !== "number" || typeof idProducto !== "number" || typeof precioPagado !== "number" || typeof impuestoMonto !== "number") throw new Error("Proporcionar los datos correctos")
         
-        const [resultTransaction] = await pool
-          .promise()
-          .query(
-            "INSERT INTO transacciones (ID_Comprador, ID_Producto, Precio_Pagado, Impuesto, Impuesto_Monto) VALUES (?, ?, ?, ?, ?)",
-            [idComprador, idProducto, precioPagado, impuesto, impuestoMonto]
-          );
+    //     const [resultTransaction] = await pool
+    //       .promise()
+    //       .query(
+    //         "INSERT INTO transacciones (ID_Comprador, ID_Producto, Precio_Pagado, Impuesto, Impuesto_Monto) VALUES (?, ?, ?, ?, ?)",
+    //         [idComprador, idProducto, precioPagado, impuesto, impuestoMonto]
+    //       );
 
-            // Crear evento de compra
-            await pool
-              .promise()
-              .query(
-                "INSERT INTO eventos_comprador (Compra, ID_Comprador) VALUES (?, ?)",
-                [resultTransaction.insertId, idComprador]
-              );
+    //         // Crear evento de compra
+    //         await pool
+    //           .promise()
+    //           .query(
+    //             "INSERT INTO eventos_comprador (Compra, ID_Comprador) VALUES (?, ?)",
+    //             [resultTransaction.insertId, idComprador]
+    //           );
 
-        res.status(200).json({ message: "Inserted Successfully" });
+    //     res.status(200).json({ message: "Inserted Successfully" });
         
 
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: error.message });
-    }
+    // } catch (error) {
+    //     console.log(error)
+    //     res.status(500).json({ error: error.message });
+    // }
 
 
 }

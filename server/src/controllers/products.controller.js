@@ -1,18 +1,43 @@
 import { pool } from "../db/dbConnection.js";
 
 export const getProducts = async (req, res) => {
-    try {
-        const [result] = await pool.promise().query("SELECT * FROM productos");
-        res.status(200).json(result);
-    } catch (error) {
-        console.log(error);
-        res.status(404).json({error: error.message})
-    }
-}
+  try {
+    const [result] = await pool.promise().query("SELECT * FROM productos");
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error: error.message });
+  }
+};
+
+export const getProduct = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const [result] = await pool
+      .promise()
+      .query("SELECT * FROM productos WHERE ID_Producto = (?)", id);
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const getCountProducts = async (req, res) => {
+  try {
+    const [resultCount] = await pool
+      .promise()
+      .query("SELECT COUNT(ID_Producto) as cantidadProductos FROM productos");
+    res.status(200).json(resultCount[0].cantidadProductos);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+};
 
 export const addProduct = async (req, res) => {
   const { nombre, descripcion, precio, stock } = req.body;
-  
+
   const preventSQLInjection =
     /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;
 
@@ -38,7 +63,7 @@ export const addProduct = async (req, res) => {
     res.status(200).json({ message: "Inserted Successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({error: error.message});
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -60,11 +85,7 @@ export const deleteProduct = async (req, res) => {
     console.log(error);
     res.status(500).json({ error: error.message });
   }
-}
-
-
-
-
+};
 
 // Insertar 500 productos random
 export const insert500Products = async (req, res) => {
@@ -124,4 +145,4 @@ export const insert500Products = async (req, res) => {
   }
 
   res.send("Ok");
-}
+};

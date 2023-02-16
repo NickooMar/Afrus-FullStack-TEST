@@ -6,21 +6,46 @@ export const getCostumers = async (req, res) => {
   try {
     const [result] = await pool.promise().query("SELECT * FROM compradores");
     res.status(200).json(result);
-} catch (error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const getCountCostumers = async (req, res) => {
+  try {
+    const [result] = await pool
+      .promise()
+      .query("SELECT COUNT(ID_Comprador) as cantidadCompradores FROM compradores");
+    res.status(200).json(result[0].cantidadCompradores);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
 }
-}
+
+export const getCostumer = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const [result] = await pool
+      .promise()
+      .query("SELECT * FROM compradores WHERE ID_Comprador = (?)", id);
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+};
 
 export const addCostumer = async (req, res) => {
-  const { nombre, apellidos, tipoComprador} = req.body;
-  
-  const preventSQLInjection =
-  /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;
+  const { nombre, apellidos, tipoComprador } = req.body;
 
-const nombreValidation = nombre.match(preventSQLInjection);
-const apellidosValidation = apellidos.match(preventSQLInjection);
-const tipoCompradorValidation = tipoComprador.match(preventSQLInjection)
+  const preventSQLInjection =
+    /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;
+
+  const nombreValidation = nombre.match(preventSQLInjection);
+  const apellidosValidation = apellidos.match(preventSQLInjection);
+  const tipoCompradorValidation = tipoComprador.match(preventSQLInjection);
 
   try {
     if (
@@ -33,29 +58,18 @@ const tipoCompradorValidation = tipoComprador.match(preventSQLInjection)
     )
       throw new Error("Proporcionar los datos correctos");
 
-    const [result] = await pool.promise().query("INSERT INTO compradores (Nombre, Apellidos, Tipo_Comprador) VALUES (?, ?, ?)", [nombre, apellidos, tipoComprador])
-    res.status(200).json({message: "Inserted Successfully"});
+    const [result] = await pool
+      .promise()
+      .query(
+        "INSERT INTO compradores (Nombre, Apellidos, Tipo_Comprador) VALUES (?, ?, ?)",
+        [nombre, apellidos, tipoComprador]
+      );
+    res.status(200).json({ message: "Inserted Successfully" });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({error: error.message})
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 
 export const insert500Costumers = async (req, res) => {
   /* IMPORTANTE: POR CUESTIONES DE ESPACIO Y SATURACIÓN (DEBIDO A LA LIMITACIÓN DE MI COMPUTADORA) SOLO SE PUEDEN INGRESAR PRODUCTOS POR TANDAS DE 500 EN 500 - EN CASO DE SER MAYOR LA BASE DE DATOS RETORNA UN ERROR */
@@ -115,4 +129,4 @@ export const insert500Costumers = async (req, res) => {
   }
 
   res.send("Ok");
-}
+};

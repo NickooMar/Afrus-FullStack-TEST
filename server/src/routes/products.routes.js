@@ -1,11 +1,20 @@
 import express from "express";
 
-import { getProducts, insert500Products, addProduct, deleteProduct } from "../controllers/products.controller.js";
+import {
+  getProducts,
+  insert500Products,
+  addProduct,
+  deleteProduct,
+  getCountProducts,
+  getProduct,
+} from "../controllers/products.controller.js";
 
 const router = express.Router();
 
 router.get("/", getProducts);
+router.get("/count", getCountProducts);
 router.post("/", addProduct);
+router.post("/find-one", getProduct);
 router.delete("/", deleteProduct);
 
 /* 
@@ -13,4 +22,4 @@ Desactivar la ruta de inserción para que no se sature la base de datos, ya que 
  router.get("/insert", insert500Products); 
 */
 
-export default router
+export default router;
