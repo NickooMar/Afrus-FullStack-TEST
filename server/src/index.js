@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 
 import productRoutes from "./routes/products.routes.js";
 import costumersRoutes from "./routes/costumers.routes.js";
-import costumerEvents from "./routes/costumerEvents.routes.js";
 import transactions from "./routes/transactions.routes.js";
 
 // Enviroment Variables
@@ -22,7 +21,6 @@ app.use(morgan('dev'))
 // Routes
 app.use("/products", productRoutes);
 app.use("/costumers", costumersRoutes);
-app.use("/costumer-event", costumerEvents);
 app.use("/transactions", transactions);
 
 // Init Server
