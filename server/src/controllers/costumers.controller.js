@@ -8,6 +8,7 @@ export const getCostumers = async (req, res) => {
     res.status(200).json(result);
 } catch (error) {
     console.log(error);
+    res.status(500).json({ error: error.message });
 }
 }
 
@@ -36,7 +37,7 @@ const tipoCompradorValidation = tipoComprador.match(preventSQLInjection)
     res.status(200).json({message: "Inserted Successfully"});
   } catch (error) {
     console.log(error)
-    res.status(400).json({error: error.message})
+    res.status(500).json({error: error.message})
   }
 
 
@@ -81,7 +82,7 @@ export const insert500Costumers = async (req, res) => {
     "Fernandez",
   ];
   const TipoComprador = [
-    "Montoributista",
+    "Monotributista",
     "Responsable Inscripto",
     "Consumidor Final",
     "Sujeto Exento",
