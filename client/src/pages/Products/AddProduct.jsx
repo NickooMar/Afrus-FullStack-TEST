@@ -46,7 +46,6 @@ const AddProduct = () => {
     }
   };
 
-  console.log(nuevoProducto);
 
   return (
     <div className="bg-slate-100 h-screen overflow-x-auto w-full">

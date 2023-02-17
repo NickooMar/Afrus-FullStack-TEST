@@ -47,7 +47,6 @@ const SearchEvent = () => {
 };
 
 const ShowResultsComponent = ({ eventsResponse }) => {
-  console.log(eventsResponse);
 
   return (
     <div class="relative overflow-x-auto mt-12">

@@ -43,12 +43,6 @@ export const getFilteredProducts = async (req, res) => {
     propiedadBusquedaCantidad,
   } = req.body.filtroProducto;
 
-  console.log(
-    precioProducto,
-    cantidadProducto,
-    propiedadBusquedaPrecio,
-    propiedadBusquedaCantidad
-  );
 
   try {
     if (

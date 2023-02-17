@@ -60,7 +60,6 @@ const CostumersList = () => {
 };
 
 const ShowResultsComponent = ({ listaCompradores }) => {
-  console.log(listaCompradores);
 
   return (
     <div class="relative overflow-x-auto mt-12">

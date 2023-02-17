@@ -11,7 +11,6 @@ const SearchTransactions = () => {
 
   const handleSubmit = async () => {
     const response = await axios.get("http://localhost:4000/transactions");
-    console.log(response.data);
     setInformeCompras(response.data);
   };
 

@@ -71,7 +71,8 @@ const SearchCostumers = () => {
             </div>
             <p class="text-gray-700 text-base">
               Aquí podra filtrar entre los distintos compradores y la cantidad
-              de compras realizadas por ese comprador que se encuentren en nuestra base de datos.
+              de compras realizadas por ese comprador que se encuentren en
+              nuestra base de datos.
             </p>
           </div>
           {/* Inputs */}
@@ -140,7 +141,6 @@ const SearchCostumers = () => {
 
 const ShowResultsComponent = ({ listaCompras }) => {
   const compras = listaCompras?.response;
-  console.log(compras);
 
   return (
     <div class="relative overflow-x-auto mt-12">
@@ -165,25 +165,20 @@ const ShowResultsComponent = ({ listaCompras }) => {
           </tr>
         </thead>
         <tbody>
-          {compras.map(
-            (compra) => (
-              console.log(compra),
-              (
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {compra.Nombre}
-                  </th>
-                  <td class="px-6 py-4">{compra.idComprador}</td>
-                  <td class="px-6 py-4">{compra.Apellidos}</td>
-                  <td class="px-6 py-4">{compra.Tipo}</td>
-                  <td class="px-6 py-4">{compra.fechaDeCompra}</td>
-                </tr>
-              )
-            )
-          )}
+          {compras.map((compra) => (
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {compra.Nombre}
+              </th>
+              <td class="px-6 py-4">{compra.idComprador}</td>
+              <td class="px-6 py-4">{compra.Apellidos}</td>
+              <td class="px-6 py-4">{compra.Tipo}</td>
+              <td class="px-6 py-4">{compra.fechaDeCompra}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

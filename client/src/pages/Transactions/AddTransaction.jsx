@@ -304,7 +304,6 @@ const ShowFinalOrder = ({ order, setOrder }) => {
     });
     toast.success("Compra Realizada correctamente");
     navigate("/");
-    console.log(result);
   };
 
   return (

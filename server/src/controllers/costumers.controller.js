@@ -55,8 +55,6 @@ export const filterCostumer = async (req, res) => {
   const { cantidadCompra, propiedadBusquedaCantidad, fechaCompra } =
     req.body.filtroCompra;
 
-  console.log(cantidadCompra, propiedadBusquedaCantidad, fechaCompra);
-
   try {
     const [results] = await pool
       .promise()
@@ -112,8 +110,6 @@ export const listCostumers = async (req, res) => {
 export const addCostumer = async (req, res) => {
   const { nombreComprador, apellidosComprador, tipoComprador } =
     req.body.nuevoComprador;
-
-  console.log(nombreComprador, apellidosComprador, tipoComprador);
 
   const preventSQLInjection =
     /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;

@@ -39,7 +39,6 @@ const SearchProducts = () => {
     }
   };
 
-  console.log(filtroProducto);
 
   return (
     <div className="bg-slate-100 h-screen overflow-x-auto">
@@ -116,7 +115,6 @@ const SearchProducts = () => {
 
 const ShowResultsComponent = ({ listaProductos }) => {
   const productos = listaProductos?.result;
-  console.log(productos);
 
   return (
     <div class="relative overflow-x-auto mt-12">
