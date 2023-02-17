@@ -24,7 +24,7 @@
     > Para instalar los modulos en el cliente
       - En la raiz de la carpeta deberá ejecutar un terminal y escribir lo siguiente:
         ```
-        cd server
+        cd client
         ```
         - Posteriormente ingresará a la carpeta del cliente y debera ejecutar:
         ```
