@@ -54,6 +54,8 @@
         - Comenzará una barra de carga en donde instalará los modulos correspondientes
         
 6. El servidor y el cliente ahora se encuentran en funcionamiento en las siguientes direcciones:
+
+
     **Servidor**
       - (http://localhost:4000/)
     
