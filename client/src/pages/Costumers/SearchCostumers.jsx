@@ -43,8 +43,7 @@ const SearchCostumers = () => {
     try {
       filtroCompra.cantidadCompra = Number(filtroCompra.cantidadCompra);
       const response = await axios.post(
-        "http://localhost:4000/costumers/filter",
-        { filtroCompra }
+        "http://localhost:4000/costumers/filter", {filtroCompra}
       );
       setListadoCompras(response?.data);
     } catch (error) {
@@ -154,6 +153,9 @@ const ShowResultsComponent = ({ listaCompras }) => {
               ID_Comprador
             </th>
             <th scope="col" class="px-6 py-3">
+              Cantidad de compras
+            </th>
+            <th scope="col" class="px-6 py-3">
               Apellidos
             </th>
             <th scope="col" class="px-6 py-3">
@@ -174,6 +176,7 @@ const ShowResultsComponent = ({ listaCompras }) => {
                 {compra.Nombre}
               </th>
               <td class="px-6 py-4">{compra.idComprador}</td>
+              <td class="px-6 py-4">{compra.cantidadCompras}</td>
               <td class="px-6 py-4">{compra.Apellidos}</td>
               <td class="px-6 py-4">{compra.Tipo}</td>
               <td class="px-6 py-4">{compra.fechaDeCompra}</td>
