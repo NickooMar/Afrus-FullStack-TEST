@@ -1,37 +1,32 @@
 import { pool } from "../db/dbConnection.js";
+import productsServices from "../services/products.services.js";
 
 export const getProducts = async (req, res) => {
   try {
-    const [result] = await pool.promise().query("SELECT * FROM productos");
-    res.status(200).json(result);
+    const result = await productsServices.getProducts();
+    return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    res.status(404).json({ error: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getProduct = async (req, res) => {
-  const { id } = req.body;
   try {
-    const [result] = await pool
-      .promise()
-      .query("SELECT * FROM productos WHERE ID_Producto = (?)", id);
-    res.status(200).json(result);
+    const { id } = req.body;
+    if (!id || typeof id !== "number") throw new Error("ID must be provided");
+    const result = await productsServices.getProduct(id);
+    return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getCountProducts = async (req, res) => {
   try {
-    const [resultCount] = await pool
-      .promise()
-      .query("SELECT COUNT(ID_Producto) as cantidadProductos FROM productos");
-    res.status(200).json(resultCount[0].cantidadProductos);
+    const resultCount = await productsServices.getCountProducts();
+    return res.status(200).json(resultCount.cantidadProductos);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -43,89 +38,88 @@ export const getFilteredProducts = async (req, res) => {
     propiedadBusquedaCantidad,
   } = req.body.filtroProducto;
 
-
   try {
     if (
       propiedadBusquedaPrecio === "MAYOR" &&
       propiedadBusquedaCantidad === "MAYOR"
     ) {
-      const [result] = await pool
-        .promise()
-        .query(
-          "SELECT * FROM productos WHERE productos.Precio > (?) AND productos.Cantidad_Stock > (?)",
-          [Number(precioProducto), Number(cantidadProducto)]
+      const result =
+        await productsServices.getFilteredProducts.priceGTquantityGT(
+          Number(precioProducto),
+          Number(cantidadProducto)
         );
-      res.status(200).json({ result });
+      return res.status(200).json({ result });
     } else if (
       propiedadBusquedaPrecio === "MENOR" &&
       propiedadBusquedaCantidad === "MENOR"
     ) {
-      const [result] = await pool
-        .promise()
-        .query(
-          "SELECT * FROM productos WHERE productos.Precio < (?) AND productos.Cantidad_Stock < (?)",
-          [Number(precioProducto), Number(cantidadProducto)]
+      const result =
+        await productsServices.getFilteredProducts.priceLTquantityLT(
+          Number(precioProducto),
+          Number(cantidadProducto)
         );
-      res.status(200).json({ result });
+      return res.status(200).json({ result });
     } else if (
       propiedadBusquedaPrecio === "MENOR" &&
       propiedadBusquedaCantidad === "MAYOR"
     ) {
-      const [result] = await pool
-        .promise()
-        .query(
-          "SELECT * FROM productos WHERE productos.Precio < (?) AND productos.Cantidad_Stock > (?)",
-          [Number(precioProducto), Number(cantidadProducto)]
+      const result =
+        await productsServices.getFilteredProducts.priceLTquantityGT(
+          Number(precioProducto),
+          Number(cantidadProducto)
         );
-      res.status(200).json({ result });
+      return res.status(200).json({ result });
     } else if (
       propiedadBusquedaPrecio === "MAYOR" &&
       propiedadBusquedaCantidad === "MENOR"
     ) {
-      const [result] = await pool
-        .promise()
-        .query(
-          "SELECT * FROM productos WHERE productos.Precio > (?) AND productos.Cantidad_Stock < (?)",
-          [Number(precioProducto), Number(cantidadProducto)]
+      const result =
+        await productsServices.getFilteredProducts.priceGTquantityLT(
+          Number(precioProducto),
+          Number(cantidadProducto)
         );
-      res.status(200).json({ result });
+      return res.status(200).json({ result });
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
 export const addProduct = async (req, res) => {
-  const {
-    nombreProducto,
-    descripcionProducto,
-    precioProducto,
-    cantidadProducto,
-  } = req.body.nuevoProducto;
-
-  const preventSQLInjection =
-    /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;
-
-  const nombreValidation = nombreProducto.match(preventSQLInjection);
-  const descripcionValidation = descripcionProducto.match(preventSQLInjection);
-
   try {
+    const {
+      nombreProducto,
+      descripcionProducto,
+      precioProducto,
+      cantidadProducto,
+    } = req.body.nuevoProducto;
+
+    const preventSQLInjection =
+      /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;
+
+    const nombreValidation = nombreProducto.match(preventSQLInjection);
+    const descripcionValidation =
+      descripcionProducto.match(preventSQLInjection);
+      console.log(req.body)
     if (
       !nombreProducto ||
       !descripcionProducto ||
       !precioProducto ||
       !cantidadProducto ||
+      typeof nombreProducto !== "string" ||
+      typeof descripcionProducto !== "string" ||
+      typeof precioProducto !== "string" ||
+      typeof cantidadProducto !== "string" ||
       nombreValidation ||
       descripcionValidation
     )
       throw new Error("Proporcionar los datos correctos");
-    await pool
-      .promise()
-      .query(
-        "INSERT INTO productos (Nombre, Descripcion, Precio, Cantidad_Stock) VALUES (?, ?, ?, ?)",
-        [nombreProducto, descripcionProducto, precioProducto, cantidadProducto]
-      );
+    await productsServices.addProduct(
+      nombreProducto,
+      descripcionProducto,
+      precioProducto,
+      cantidadProducto
+    );
     res.status(200).json({ message: "Inserted Successfully" });
   } catch (error) {
     console.log(error);
