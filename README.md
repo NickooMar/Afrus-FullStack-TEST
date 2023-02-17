@@ -12,16 +12,24 @@
 4. Ahora deberá instalar los modulos que hacen que la aplicación funcione, en el servidor y en el cliente:
     > Para instalar los modulos en el servidor
       - En la raiz de la carpeta deberá ejecutar un terminal y escribir lo siguiente:
-        * cd server
+        ```
+        cd server
+        ```
         - Posteriormente ingresará a la carpeta del servidor y debera ejecutar:
-        * npm install
+        ```
+        npm install
+        ```
         - Comenzará una barra de carga en donde instalará los modulos correspondientes
         
     > Para instalar los modulos en el cliente
       - En la raiz de la carpeta deberá ejecutar un terminal y escribir lo siguiente:
-        * cd client
+        ```
+        cd server
+        ```
         - Posteriormente ingresará a la carpeta del cliente y debera ejecutar:
-        * npm install
+        ```
+        npm install
+        ```
         - Comenzará una barra de carga en donde instalará los modulos correspondientes
 
 5. Finalmente solo queda por dar inicio al servidor y al cliente:
