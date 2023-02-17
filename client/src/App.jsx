@@ -7,6 +7,8 @@ import AddProduct from "./pages/Products/AddProduct";
 import AddCostumer from "./pages/Costumers/AddCostumer";
 import SearchCostumer from "./pages/Costumers/SearchCostumers";
 import AddTransaction from "./pages/Transactions/AddTransaction";
+import SearchTransactions from "./pages/Transactions/SearchTransactions";
+import Missing from "./pages/Missing";
 
 import Navbar from "./components/Navbar";
 
@@ -25,7 +27,10 @@ const App = () => {
         <Route path="/costumers/new" element={<AddCostumer />} />
 
         {/* Costumers */}
+        <Route path="/transactions" element={<SearchTransactions />} />
         <Route path="/transactions/new" element={<AddTransaction />} />
+
+        <Route path="*" element={<Missing />} />
       </Routes>
     </>
   );
