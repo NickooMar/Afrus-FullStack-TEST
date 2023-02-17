@@ -19,7 +19,7 @@ const SearchEvent = () => {
               Listar eventos relacionados con compradores
             </div>
             <p class="text-gray-700 text-base">
-              Aquí podra listar a todos los eventos de acuerdo a los respectivos
+              Aquí podra listar todos los eventos de acuerdo a los respectivos
               compradores que hayan realizado el evento.
             </p>
           </div>

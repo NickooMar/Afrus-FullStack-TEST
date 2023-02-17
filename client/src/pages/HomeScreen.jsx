@@ -6,7 +6,7 @@ const HomeScreen = () => {
   return (
     <div className="h-screen w-full overflow-auto bg-slate-100">
       <div className="flex flex-col justify-center items-center mt-24">
-        <div class="max-w-md rounded overflow-hidden shadow-lg bg-white">
+        <div class="max-w-md rounded overflow-hidden shadow-lg bg-white hover:opacity-75">
           <Link
             to="https://github.com/NickooMar"
             className="cursor-pointer"
@@ -17,8 +17,8 @@ const HomeScreen = () => {
                 Examen Técnico Afrus
               </div>
               <p class="text-gray-700 text-base">
-                Bienvenido a la presentación del examen técnico. En la parte
-                superior encontrara los distintos {' '}
+                Bienvenido a la presentación del examen técnico. <br />
+                En la parte superior encontrara los distintos {' '}
                 <span className="italic">Links</span> que lo redireccionaran a
                 las pestañas que ejecutarán la funcionalidad solicitada en el
                 documento.

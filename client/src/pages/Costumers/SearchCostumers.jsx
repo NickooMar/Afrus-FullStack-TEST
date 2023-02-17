@@ -70,8 +70,8 @@ const SearchCostumers = () => {
               Búsqueda de un comprador
             </div>
             <p class="text-gray-700 text-base">
-              Aquí podra filtrar entre los distintos compradores y sus
-              respectivas compras que se encuentren en nuestra base de datos.
+              Aquí podra filtrar entre los distintos compradores y la cantidad
+              de compras realizadas por ese comprador que se encuentren en nuestra base de datos.
             </p>
           </div>
           {/* Inputs */}
