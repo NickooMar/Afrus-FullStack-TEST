@@ -80,6 +80,7 @@
 ![imagen](https://user-images.githubusercontent.com/68347411/219689798-6d1061e0-7e89-48f8-9bdb-227ba3c8167b.png)
 
 - Products
+
     Filtrar Productos
     ![imagen](https://user-images.githubusercontent.com/68347411/219689918-f7c98dda-1a00-49ce-b319-83dfff4eb5b8.png)
     
@@ -87,6 +88,7 @@
     ![imagen](https://user-images.githubusercontent.com/68347411/219690022-baee9302-dd9e-4297-9e65-46678d13a711.png)
 
 - Costumers
+
     Filtrar Compradores
     ![imagen](https://user-images.githubusercontent.com/68347411/219690091-d4d9a347-c926-4758-a9a7-9d40c2f3f084.png)
     
@@ -97,6 +99,7 @@
     ![imagen](https://user-images.githubusercontent.com/68347411/219690242-7ef25a15-3e2b-4bf2-9d10-84d9b3458bd3.png)
 
 - Transactions
+
     Realizar Compra
     ![imagen](https://user-images.githubusercontent.com/68347411/219690375-d3b64b83-505c-4569-88fe-8ab0042b8725.png)
 
@@ -104,6 +107,7 @@
     ![imagen](https://user-images.githubusercontent.com/68347411/219690463-e9f5e28d-d1b5-4fb2-8e04-adde09532b72.png)
 
 - Events
+
     Obtener los eventos relacionados con compradores y transacciones
     ![imagen](https://user-images.githubusercontent.com/68347411/219690626-b36dde75-6020-430b-b360-67d426dc5e6a.png)
 
