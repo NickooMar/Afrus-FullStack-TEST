@@ -28,34 +28,35 @@
     > Para inciar el servidor
       - En la raiz de la carpeta deberá ejecutar un terminal y escribir lo siguiente:
         ```
-        * cd server
+        cd server
         ```
         
         *En caso de ya encontrarse en la carpeta del servidor ejecute lo siguiente*
         
         - Posteriormente ingresará a la carpeta del servidor y debera ejecutar:
         ```
-        * npm run dev
+        npm run dev
         ```
         - Comenzará una barra de carga en donde instalará los modulos correspondientes
         
     > Para instalar los modulos en el cliente
       - En la raiz de la carpeta deberá ejecutar un terminal y escribir lo siguiente:
         ```
-        * cd client
+        cd client
         ```
         
         *En caso de ya encontrarse en la carpeta del cliente ejecute lo siguiente*
         
         - Posteriormente ingresará a la carpeta del cliente y debera ejecutar:
         ```
-        * npm run dev
+        npm run dev
         ```
         - Comenzará una barra de carga en donde instalará los modulos correspondientes
         
 6. El servidor y el cliente ahora se encuentran en funcionamiento en las siguientes direcciones:
     **Servidor**
       - (http://localhost:4000/)
+    
     **Cliente**
       - (http://localhost:5173/)
       
@@ -63,8 +64,8 @@
       
 ## EN EL CLIENTE ENCONTRARÁ TODAS LAS FUNCIONALIDADES QUE PROPONE EL ENUNCIADO
 
-### Gracias y saludos 
-### Atte. Nicolás Marsili
+**Gracias y saludos**
+**Atte. Nicolás Marsili**
         
         
         
