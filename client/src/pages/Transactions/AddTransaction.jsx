@@ -73,83 +73,100 @@ const AddTransaction = () => {
 
   return (
     <>
-      <div className="h-screen overflow-x-auto bg-gray-100">
-        <div className="flex justify-center items-center pt-12">
-          <div className="h-3/4 w-4/6 rounded-xl bg-slate-900">
-            <div className="flex flex-col items-center">
-              <h1 className="text-4xl font-semibold text-white text-center pt-4 font-mono">
-                REALIZAR COMPRA
-              </h1>
-              <div className="w-1/2 h-0.5 bg-slate-800 mt-4" />
+      <div className="bg-slate-100 h-screen overflow-x-auto w-full">
+        <div className="flex flex-col justify-center items-center mt-24">
+          <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2 text-center">
+                Realizar Compra
+              </div>
+              <p class="text-gray-700 text-base">
+                Aquí podras realizar una compra relacionandola con varios
+                productos, es decir, podras ingresar tantos productos como
+                quieras, la base de datos esta Normalizada por ende creara un
+                registro por transaccion que se relacionara con varios productos
+                que se encuentren en esa transaccion pero almacenandolos en otra
+                tabla
+              </p>
             </div>
-
-            <div className="grid grid-cols-2 h-[300px] place-items-center px-8">
-              <div className="w-full flex flex-col justify-center items-center">
-                <h1 className="text-lg font-semibold text-center text-white">Identificación de Comprador (ID)</h1>
+            {/* Inputs */}
+            <div className="flex justify-center items-center gap-4">
+              <div className="flex flex-col ">
+                <p class="text-gray-700 text-base">
+                  Identificación del Comprador (ID)
+                </p>
                 <input
                   type="number"
                   name="idComprador"
                   id="idComprador"
                   value={inputNumberComprador}
                   onChange={handleInputCompradorChange}
-                  className='rounded-lg mt-2 shadow-md shadow-slate-800 w-1/2 text-xl pl-2'
+                  className="shadow-lg border border-zinc-600 pl-1"
                 />
               </div>
-              <div className="w-full flex flex-col justify-center items-center">
-                <h1 className="text-lg font-semibold text-center text-white">Identificador de Producto (ID)</h1>
+              <div className="flex flex-col">
+                <p class="text-gray-700 text-base">
+                  Identificación del Producto (ID)
+                </p>
                 <input
                   type="number"
                   name="idProducto"
                   id="idProducto"
                   value={inputNumberProducto}
                   onChange={handleInputProductosChange}
-                  className='rounded-lg mt-2 shadow-md shadow-slate-800 w-1/2 text-xl pl-2'
+                  className="shadow-lg border border-zinc-600 pl-1"
                 />
               </div>
-              <div className="w-full flex flex-col justify-center items-center">
-                <h1 className="text-lg font-semibold text-center text-white">Cantidad</h1>
+              <div className="flex flex-col ">
+                <p class="text-gray-700 text-base">Cantidad Solicitada</p>
                 <input
                   type="number"
                   name="cantidad"
                   id="cantidad"
                   value={cantidad}
                   onChange={(e) => setCantidad(e.target.value)}
-                  className='rounded-lg mt-2 shadow-md shadow-slate-800 w-1/2 text-xl pl-2'
+                  className="shadow-lg border border-zinc-600 pl-1"
                 />
               </div>
-              <div className="w-full flex flex-col justify-center items-center">
-                <h1 className="text-lg font-semibold text-center text-white">Impuesto</h1>
+              <div className="flex flex-col ">
+                <p class="text-gray-700 text-base">Impuestos</p>
                 <select
                   name="impuestos"
                   id="impuestos"
+                  className="shadow-lg border border-zinc-600 pl-1"
                   onChange={handleSelectImpuestosChange}
-                  className='rounded-lg mt-2 shadow-md shadow-slate-800 w-1/2 text-xl pl-2'
                 >
-                  <option value="Seleccionar" disabled selected >
+                  <option value="Seleccionar" disabled selected>
                     Seleccionar
                   </option>
-                  {Impuestos.map((impuesto) => (
+                  {Impuestos?.map((impuesto) => (
                     <option value={impuesto} key={impuesto}>
                       {impuesto}
                     </option>
                   ))}
                 </select>
               </div>
-              <div className="w-full flex flex-col justify-center items-center">
-                <h1 className="text-lg font-semibold text-center text-white">Total Impuesto ($)</h1>
+              <div className="flex flex-col ">
+                <p class="text-gray-700 text-base">Total Impuestos ($)</p>
                 <input
                   type="number"
                   name="montoImpuesto"
                   id="montoImpuesto"
                   value={montoImpuesto}
                   onChange={(e) => setMontoImpuesto(e.target.value)}
-                  className='rounded-lg mt-2 shadow-md shadow-slate-800 w-1/2 text-xl pl-2'
+                  className="shadow-lg border border-zinc-600 pl-1"
                 />
               </div>
             </div>
-              <div className="flex justify-center w-full my-4">
-                <button onClick={handleCalculate} className='py-2 px-4 w-2/5 bg-blue-600 rounded-xl text-2xl text-white'>Calcular</button>
-              </div>
+
+            <div class="py-4 flex justify-center items-center">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleCalculate}
+              >
+                Calcular
+              </button>
+            </div>
           </div>
         </div>
         {!productoCalculado ? (

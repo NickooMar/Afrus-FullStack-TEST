@@ -1,7 +1,17 @@
 import { pool } from "../db/dbConnection.js";
 
-// Agregar Compra
-// INSERT INTO transacciones (Precio_Pagado, Impuesto, Impuesto_Monto, ID_Comprador, ID_Producto) VALUES (?, ?, ?, ?, ?)
+export const getTransactions = async (req, res) => {
+  try {
+    const [result] = await pool
+      .promise()
+      .query(
+        "SELECT transacciones.ID_Transaccion, transacciones.Fecha_Compra, eventos_comprador.ID_Evento, transacciones.Precio_Pagado, compradores.Nombre, compradores.Apellidos, compradores.ID_Comprador FROM transacciones, compradores, eventos_comprador WHERE transacciones.ID_Comprador = compradores.ID_Comprador AND eventos_comprador.ID_Comprador = compradores.ID_Comprador GROUP BY compradores.ID_Comprador"
+      );
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const addBuys = async (req, res) => {
   const totalFinalTransaction = req.body.totalFinalTransaction;
@@ -31,19 +41,18 @@ export const addBuys = async (req, res) => {
               resultTransaction.insertId,
             ]
           );
+        // Crear evento de compra
+        await pool
+          .promise()
+          .query(
+            "INSERT INTO eventos_comprador (Compra, ID_Comprador) VALUES (?, ?)",
+            [resultTransaction.insertId, order[0].idComprador]
+          );
+        res.status(200).json({ message: "Inserted Successfully" });
       } catch (error) {
         console.log(error);
       }
     });
-
-    // Crear evento de compra
-    await pool
-      .promise()
-      .query(
-        "INSERT INTO eventos_comprador (Compra, ID_Comprador) VALUES (?, ?)",
-        [resultTransaction.insertId, order[0].idComprador]
-      );
-    res.status(200).json({ message: "Inserted Successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

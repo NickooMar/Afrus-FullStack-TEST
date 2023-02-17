@@ -1,14 +1,20 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
+import { useNavigate } from "react-router-dom";
+import { BsFillPersonPlusFill } from "react-icons/bs";
+
 const SearchCostumers = () => {
+  const navigate = useNavigate();
   function getCurrentDate(separator) {
     let newDate = new Date();
     let date = newDate.getDate();
     let month = newDate.getMonth() + 1;
     let year = newDate.getFullYear();
-    return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+    return `${year}${separator}${
+      month < 10 ? `0${month}` : `${month}`
+    }${separator}${date}`;
   }
 
   const initialState = {
@@ -48,7 +54,16 @@ const SearchCostumers = () => {
 
   return (
     <div className="bg-slate-100 h-screen overflow-x-auto w-full">
-      <div className="flex flex-col justify-center items-center mt-24">
+      <div className="flex flex-col justify-center items-center">
+        <div
+          className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
+          onClick={() => navigate("/costumers/new")}
+        >
+          <BsFillPersonPlusFill size={36} />
+          <h1 className="hidden lg:flex text-md xl:text-lg px-2 font-semibold ">
+            Agregar Comprador
+          </h1>
+        </div>
         <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2 text-center">
@@ -150,21 +165,25 @@ const ShowResultsComponent = ({ listaCompras }) => {
           </tr>
         </thead>
         <tbody>
-          {compras.map((compra) => (
-            console.log(compra),
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {compra.Nombre}
-              </th>
-              <td class="px-6 py-4">{compra.idComprador}</td>
-              <td class="px-6 py-4">{compra.Apellidos}</td>
-              <td class="px-6 py-4">{compra.Tipo}</td>
-              <td class="px-6 py-4">{compra.fechaDeCompra}</td>
-            </tr>
-          ))}
+          {compras.map(
+            (compra) => (
+              console.log(compra),
+              (
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {compra.Nombre}
+                  </th>
+                  <td class="px-6 py-4">{compra.idComprador}</td>
+                  <td class="px-6 py-4">{compra.Apellidos}</td>
+                  <td class="px-6 py-4">{compra.Tipo}</td>
+                  <td class="px-6 py-4">{compra.fechaDeCompra}</td>
+                </tr>
+              )
+            )
+          )}
         </tbody>
       </table>
     </div>

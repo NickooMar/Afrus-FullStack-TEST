@@ -1,9 +1,10 @@
 import express from "express";
-import { insert500transactions, addBuys } from "../controllers/transactions.controller.js";
+import { insert500transactions, addBuys, getTransactions } from "../controllers/transactions.controller.js";
 
 const router = express.Router();
 
 router.post("/", addBuys);
+router.get("/", getTransactions);
 
 
 /*

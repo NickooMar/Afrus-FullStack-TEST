@@ -22,7 +22,7 @@ const Missing = () => {
           </div>
           <div class="px-6 pt-4 pb-2 text-end">
             <span
-              class="inline-block bg-sky-600 rounded-full px-3 py-1 font-semibold text-white mr-8 mb-2"
+              class="inline-block bg-sky-600 rounded-full px-3 py-1 font-semibold text-white mr-8 mb-2 cursor-pointer"
               onClick={() => {
                 navigate(from, { replace: true });
               }}

@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+
 const SearchProducts = () => {
+
+  const navigate = useNavigate()
+
   const initialState = {
     precioProducto: null,
     cantidadProducto: null,
@@ -35,8 +42,12 @@ const SearchProducts = () => {
   console.log(filtroProducto);
 
   return (
-    <div className="bg-slate-100 h-screen overflow-x-auto w-full">
-      <div className="flex flex-col justify-center items-center mt-24">
+    <div className="bg-slate-100 h-screen overflow-x-auto">
+      <div className="flex flex-col justify-center items-center">
+      <div className='py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer' onClick={() => navigate('/products/new')}>
+        <AiOutlineAppstoreAdd size={48}/>
+        <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">Agregar Producto</h1>
+      </div>
         <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2 text-center">
