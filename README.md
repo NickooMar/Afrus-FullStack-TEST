@@ -64,7 +64,7 @@
       
       
       
-## EN EL CLIENTE ENCONTRARÁ TODAS LAS FUNCIONALIDADES QUE PROPONE EL ENUNCIADO
+### En el cliente encontrará todas las funcionalidades propuestas en el enunciado
 
 **Gracias y saludos**
 **Atte. Nicolás Marsili**
