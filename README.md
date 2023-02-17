@@ -74,7 +74,7 @@
       
 ### En el cliente encontrará todas las funcionalidades propuestas en el enunciado
 
-##SCREENS
+## SCREENS
 
 - HomeScreen
 ![imagen](https://user-images.githubusercontent.com/68347411/219689798-6d1061e0-7e89-48f8-9bdb-227ba3c8167b.png)
