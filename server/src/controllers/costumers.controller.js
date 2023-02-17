@@ -1,6 +1,5 @@
 import { pool } from "../db/dbConnection.js";
-
-// INSERT INTO compradores (Nombre, Apellidos, Tipo_Comprador) VALUES (?, ?, ?)
+import costumersServices from "../services/costumers.services.js";
 
 export const getCostumers = async (req, res) => {
   try {
@@ -26,15 +25,10 @@ export const getTipoComprador = async (req, res) => {
 
 export const getCountCostumers = async (req, res) => {
   try {
-    const [result] = await pool
-      .promise()
-      .query(
-        "SELECT COUNT(ID_Comprador) as cantidadCompradores FROM compradores"
-      );
-    res.status(200).json(result[0].cantidadCompradores);
+    const result = await costumersServices.getCountCostumers()
+    return res.status(200).json(result.cantidadCompradores)
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({message: error.message})
   }
 };
 
