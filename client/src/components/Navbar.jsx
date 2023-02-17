@@ -58,14 +58,14 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        List
+                        Filtrar
                       </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        to="/transactions/new"
+                        to="/products/new"
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -73,7 +73,7 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        New
+                        Agregar
                       </Link>
                     )}
                   </Menu.Item>
@@ -103,7 +103,7 @@ const Navbar = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <a
-                        href="#"
+                        href="/costumers"
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -111,14 +111,14 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        List
+                        Filtrar
                       </a>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
                       <a
-                        href="/transactions/new"
+                        href="/costumers/new"
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -126,7 +126,7 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        New
+                        Agregar
                       </a>
                     )}
                   </Menu.Item>
@@ -155,8 +155,8 @@ const Navbar = () => {
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <Link
+                        to="/transactions"
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -164,14 +164,14 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        List
-                      </a>
+                        Filtrar
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="/transactions/new"
+                      <Link
+                        to="/transactions/new"
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -179,8 +179,8 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        New
-                      </a>
+                        Realizar Compra
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
@@ -196,17 +196,19 @@ const Navbar = () => {
           </a>
         </div>
         <div className="items-center space-x-8 mx-2 hidden lg:flex">
-          <a href="/" className="text-lg hover:opacity-50">
+          <a
+            href="mailto:nicoo.marsili@gmail.com?Subject=Afrus%20|%20Examen%20Técnico"
+            className="text-lg hover:opacity-50"
+          >
             Contact
           </a>
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-            className="text-lg px-6 py-2 bg-blue-900 bg-opacity-50 rounded-3xl text-blue-500 hover:opacity-80"
+          <Link
+            to="https://github.com/NickooMar"
+            target='_blank'
+            className="text-lg px-6 py-2 bg-blue-900 bg-opacity-50 rounded-3xl text-blue-500 hover:opacity-70 hover:text-white"
           >
             About
-          </button>
+          </Link>
         </div>
       </div>
       {collapseToggle ? (

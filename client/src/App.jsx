@@ -8,6 +8,7 @@ import AddCostumer from "./pages/Costumers/AddCostumer";
 import SearchCostumer from "./pages/Costumers/SearchCostumers";
 import AddTransaction from "./pages/Transactions/AddTransaction";
 import Transactions from "./pages/Transactions/Transactions";
+import Missing from "./pages/Missing";
 
 import Navbar from "./components/Navbar";
 
@@ -28,6 +29,8 @@ const App = () => {
         {/* Costumers */}
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/transactions/new" element={<AddTransaction />} />
+
+        <Route path="*" element={<Missing />} />
       </Routes>
     </>
   );

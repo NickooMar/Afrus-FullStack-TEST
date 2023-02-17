@@ -7,11 +7,13 @@ import {
   deleteProduct,
   getCountProducts,
   getProduct,
+  getFilteredProducts
 } from "../controllers/products.controller.js";
 
 const router = express.Router();
 
 router.get("/", getProducts);
+router.post("/filtered", getFilteredProducts);
 router.get("/count", getCountProducts);
 router.post("/", addProduct);
 router.post("/find-one", getProduct);
