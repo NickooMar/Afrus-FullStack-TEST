@@ -96,10 +96,24 @@ export const filterCostumer = async (req, res) => {
   }
 };
 
-export const addCostumer = async (req, res) => {
-  const { nombreComprador, apellidosComprador, tipoComprador } = req.body.nuevoComprador;
+export const listCostumers = async (req, res) => {
+  try {
+    const [result] = await pool
+      .promise()
+      .query(
+        "SELECT * FROM compradores JOIN transacciones ON compradores.ID_Comprador = transacciones.ID_Comprador ORDER BY transacciones.ID_Comprador ASC"
+      );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
-  console.log(nombreComprador, apellidosComprador, tipoComprador)
+export const addCostumer = async (req, res) => {
+  const { nombreComprador, apellidosComprador, tipoComprador } =
+    req.body.nuevoComprador;
+
+  console.log(nombreComprador, apellidosComprador, tipoComprador);
 
   const preventSQLInjection =
     /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi;
