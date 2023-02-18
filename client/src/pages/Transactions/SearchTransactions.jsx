@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,10 +8,22 @@ const SearchTransactions = () => {
   const navigate = useNavigate();
 
   const [informeCompras, setInformeCompras] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const handleSubmit = async () => {
-    const response = await axios.get("http://localhost:4000/transactions");
-    setInformeCompras(response.data);
+    try {
+      setIsLoading(true);
+      const response = await axios.get("http://localhost:4000/transactions");
+      setInformeCompras(response.data);
+    } catch (error) {
+      throw Error("Error searching a transaction");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -21,7 +33,7 @@ const SearchTransactions = () => {
           className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
           onClick={() => navigate("/transactions/new")}
         >
-          <BsCartPlus size={48} />
+          <BsCartPlus size={36} />
           <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
             Realizar Compra
           </h1>
@@ -42,8 +54,10 @@ const SearchTransactions = () => {
 
           <div class="py-4 flex justify-center items-center">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              type="button"
+              class="bg-blue-500 disabled:opacity-25 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={handleSubmit}
+              disabled={isLoading ? true : false}
             >
               Obtener
             </button>

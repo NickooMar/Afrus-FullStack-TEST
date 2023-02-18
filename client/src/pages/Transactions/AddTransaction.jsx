@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { FiDelete } from "react-icons/fi";
+import { FiDelete, FiFilter } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AddTransaction = () => {
+  const navigate = useNavigate();
   const [contadorCompradores, setContadorCompradores] = useState(0);
   const [contadorProductos, setContadorProductos] = useState(0);
 
@@ -23,20 +24,47 @@ const AddTransaction = () => {
 
   const [productoCalculado, setProductoCalculado] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchClients = async () => {
       const result = await axios.get("http://localhost:4000/costumers/count");
+      console.log(result.data);
       setContadorCompradores(result.data);
     };
 
     const fetchProducts = async () => {
       const result = await axios.get("http://localhost:4000/products/count");
+      console.log(result.data);
       setContadorProductos(result.data);
     };
 
-    fetchClients();
-    fetchProducts();
-  }, []);
+    try {
+      setIsLoading(true);
+      fetchClients();
+      fetchProducts();
+    } catch (error) {
+      throw Error("Error Fetching");
+    } finally {
+      setIsLoading(false);
+    }
+
+    if (
+      !inputNumberComprador ||
+      !inputNumberProducto ||
+      !cantidad ||
+      !impuestoSeleccionado ||
+      !montoImpuesto
+    ) {
+      return setIsLoading(true);
+    }
+  }, [
+    inputNumberComprador,
+    inputNumberProducto,
+    cantidad,
+    impuestoSeleccionado,
+    montoImpuesto,
+  ]);
 
   const handleInputCompradorChange = (e) => {
     const value = Math.max(
@@ -60,11 +88,18 @@ const AddTransaction = () => {
 
   const handleCalculate = () => {
     const fetchSingleProduct = async () => {
-      const result = await axios.post(
-        "http://localhost:4000/products/find-one",
-        { id: inputNumberProducto }
-      );
-      setProductoCalculado(result.data[0]);
+      try {
+        setIsLoading(true);
+        const result = await axios.post(
+          "http://localhost:4000/products/find-one",
+          { id: inputNumberProducto }
+        );
+        setProductoCalculado(result.data[0]);
+      } catch (error) {
+        throw Error("Error Fetching");
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     document.getElementById("idComprador").disabled = true;
@@ -74,7 +109,16 @@ const AddTransaction = () => {
   return (
     <>
       <div className="bg-slate-100 h-screen overflow-x-auto w-full">
-        <div className="flex flex-col justify-center items-center mt-24">
+        <div className="flex flex-col justify-center items-center">
+          <div
+            className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
+            onClick={() => navigate("/transactions")}
+          >
+            <FiFilter size={36} />
+            <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
+              Filtrar Compra
+            </h1>
+          </div>
           <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2 text-center">
@@ -161,8 +205,10 @@ const AddTransaction = () => {
 
             <div class="py-4 flex justify-center items-center">
               <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                type="button"
+                class="bg-blue-500 disabled:opacity-25 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={handleCalculate}
+                disabled={isLoading ? true : false}
               >
                 Calcular
               </button>
@@ -292,18 +338,27 @@ const ShowFinalOrder = ({ order, setOrder }) => {
   const navigate = useNavigate();
   var totalFinalTransaction = 0;
 
+  const [isLoadingNewBuy, setIsLoadingNewBuy] = useState(false);
+
   const handleDeleteItem = (i) => {
     order.splice(i, 1);
     setOrder([...order]);
   };
 
   const handleNewBuy = async () => {
-    const result = await axios.post("http://localhost:4000/transactions", {
-      order,
-      totalFinalTransaction,
-    });
-    toast.success("Compra Realizada correctamente");
-    navigate("/");
+    try {
+      setIsLoadingNewBuy(true);
+      const result = await axios.post("http://localhost:4000/transactions", {
+        order,
+        totalFinalTransaction,
+      });
+      toast.success("Compra Realizada correctamente");
+      navigate("/");
+    } catch (error) {
+      throw Error("Error handling a new buy");
+    } finally {
+      setIsLoadingNewBuy(false);
+    }
   };
 
   return (
@@ -382,8 +437,10 @@ const ShowFinalOrder = ({ order, setOrder }) => {
       </div>
       <div className="flex justify-center w-full">
         <button
-          className="p-3 bg-green-600 rounded-xl text-white mt-6"
+          type="button"
+          className="p-3 disabled:opacity-25 bg-green-600 rounded-xl text-white mt-6"
           onClick={handleNewBuy}
+          disabled={isLoadingNewBuy ? true : false}
         >
           Realizar Compra
         </button>

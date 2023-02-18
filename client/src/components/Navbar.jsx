@@ -77,6 +77,21 @@ const Navbar = () => {
                       </Link>
                     )}
                   </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to="/products/list"
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm"
+                        )}
+                      >
+                        Administrar
+                      </Link>
+                    )}
+                  </Menu.Item>
                 </div>
               </Menu.Items>
             </Transition>

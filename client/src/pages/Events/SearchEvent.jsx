@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
 const SearchEvent = () => {
   const [eventsResponse, setEventsResponse] = useState();
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   const handleSubmit = async () => {
-    const response = await axios.get("http://localhost:4000/events");
-    setEventsResponse(response.data);
+    try {
+      setIsLoading(true);
+      const response = await axios.get("http://localhost:4000/events");
+      setEventsResponse(response.data);
+    } catch (error) {
+      throw Error("Error Submiting");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -27,8 +40,10 @@ const SearchEvent = () => {
 
           <div class="py-4 flex justify-center items-center">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              type="button"
+              class="bg-blue-500 disabled:opacity-25 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={handleSubmit}
+              disabled={isLoading ? true : false}
             >
               Obtener
             </button>
@@ -47,7 +62,6 @@ const SearchEvent = () => {
 };
 
 const ShowResultsComponent = ({ eventsResponse }) => {
-
   return (
     <div class="relative overflow-x-auto mt-12">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

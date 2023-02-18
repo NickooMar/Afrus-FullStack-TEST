@@ -2,12 +2,12 @@ import express from "express";
 import {
   addCostumer,
   getCostumers,
-  insert500Costumers,
   getCostumer,
   getCountCostumers,
   filterCostumer,
   getTipoComprador,
   listCostumers,
+  // insert500Costumers,
 } from "../controllers/costumers.controller.js";
 
 const router = express.Router();
