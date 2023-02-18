@@ -65,11 +65,11 @@ export const insert500transactions = async (req, res) => {
   // Obtener cantidad de Productos y Compradores
   const [resultOfProducts] = await pool
     .promise()
-    .query("SELECT COUNT(productos.ID_Producto) as ID_Producto FROM productos");
+    .query("SELECT MAX(productos.ID_Producto) as ID_Producto FROM productos");
   const [resultOfCostumers] = await pool
     .promise()
     .query(
-      "SELECT COUNT(compradores.ID_Comprador) as ID_Comprador FROM compradores"
+      "SELECT MAX(compradores.ID_Comprador) as ID_Comprador FROM compradores"
     );
 
   // Definir los valores al azar que seran agregados

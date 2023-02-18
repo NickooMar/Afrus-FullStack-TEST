@@ -4,6 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+import { AiOutlineFileSearch } from "react-icons/ai";
+
 const AddProduct = () => {
   const navigate = useNavigate();
   const initialState = {
@@ -37,7 +39,7 @@ const AddProduct = () => {
     }
     try {
       await axios.post("http://localhost:4000/products", { nuevoProducto });
-      setNuevoProducto(initialState)
+      setNuevoProducto(initialState);
       toast.success("Producto Agregado Satisfactoriamente");
       navigate("/products");
     } catch (error) {
@@ -46,10 +48,18 @@ const AddProduct = () => {
     }
   };
 
-
   return (
     <div className="bg-slate-100 h-screen overflow-x-auto w-full">
-      <div className="flex flex-col justify-center items-center mt-24">
+      <div className="flex flex-col justify-center items-center">
+        <div
+          className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
+          onClick={() => navigate("/products/list")}
+        >
+          <AiOutlineFileSearch size={48} />
+          <h1 className="hidden lg:flex text-md pt-1 px-2 font-semibold ">
+            Administrar Productos
+          </h1>
+        </div>
         <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2 text-center">

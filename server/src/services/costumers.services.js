@@ -14,7 +14,7 @@ const getCountCostumers = async () => {
     const [result] = await pool
       .promise()
       .query(
-        "SELECT COUNT(ID_Comprador) as cantidadCompradores FROM compradores"
+        "SELECT MAX(ID_Comprador) as cantidadCompradores FROM compradores"
       );
     return result[0];
   } catch (error) {
