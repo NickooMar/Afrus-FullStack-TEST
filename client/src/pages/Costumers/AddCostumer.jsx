@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaRegListAlt } from "react-icons/fa";
+import { FiFilter } from "react-icons/fi";
 
 const AddCostumer = () => {
   const navigate = useNavigate();
@@ -47,7 +49,30 @@ const AddCostumer = () => {
 
   return (
     <div className="bg-slate-100 h-screen overflow-x-auto w-full">
-      <div className="flex flex-col justify-center items-center mt-24">
+      <div className="flex flex-col justify-center items-center">
+      <div className="flex w-full justify-center items-center gap-4">
+          <div
+            className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
+            onClick={() => navigate("/costumers/list")}
+          >
+            <FaRegListAlt size={36} />
+            <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
+              Listar compradores
+            </h1>
+          </div>
+          <div
+          className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
+          onClick={() => navigate("/costumers")}
+        >
+          <FiFilter size={36} />
+          <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
+            Filtrar comprador
+          </h1>
+        </div>
+        </div>
+        
+        
+        
         <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2 text-center">

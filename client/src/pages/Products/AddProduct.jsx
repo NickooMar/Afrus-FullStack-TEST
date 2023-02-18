@@ -17,6 +17,7 @@ const AddProduct = () => {
   };
 
   const [nuevoProducto, setNuevoProducto] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     if (typeof e === "number") {
@@ -30,15 +31,16 @@ const AddProduct = () => {
   };
 
   const handleSubmit = async () => {
-    if (
-      !nuevoProducto.nombreProducto ||
-      !nuevoProducto.descripcionProducto ||
-      !nuevoProducto.cantidadProducto ||
-      !nuevoProducto.precioProducto
-    ) {
-      return toast.error("Ingrese datos validos");
-    }
     try {
+      setIsLoading(true);
+      if (
+        !nuevoProducto.nombreProducto ||
+        !nuevoProducto.descripcionProducto ||
+        !nuevoProducto.cantidadProducto ||
+        !nuevoProducto.precioProducto
+      ) {
+        return toast.error("Ingrese datos validos");
+      }
       await axios.post("http://localhost:4000/products", { nuevoProducto });
       setNuevoProducto(initialState);
       toast.success("Producto Agregado Satisfactoriamente");
@@ -46,6 +48,8 @@ const AddProduct = () => {
     } catch (error) {
       console.log(error);
       setNuevoProducto(initialState);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,7 +61,7 @@ const AddProduct = () => {
             className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
             onClick={() => navigate("/products")}
           >
-            <FiFilter size={48} />
+            <FiFilter size={36} />
             <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
               Filtrar Producto
             </h1>
@@ -66,7 +70,7 @@ const AddProduct = () => {
             className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
             onClick={() => navigate("/products/list")}
           >
-            <AiOutlineFileSearch size={48} />
+            <AiOutlineFileSearch size={36} />
             <h1 className="hidden lg:flex text-md pt-1 px-2 font-semibold ">
               Administrar Productos
             </h1>
@@ -134,8 +138,10 @@ const AddProduct = () => {
 
           <div class="py-4 flex justify-center items-center">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              type="button"
+              class="bg-blue-500 disabled:opacity-25 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={handleSubmit}
+              disabled={isLoading ? true : false}
             >
               Ingresar
             </button>

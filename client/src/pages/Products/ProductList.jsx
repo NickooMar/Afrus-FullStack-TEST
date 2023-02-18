@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
-import { toast } from "react-toastify";
 import { FiDelete, FiFilter } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const ProductList = () => {
             className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
             onClick={() => navigate("/products/new")}
           >
-            <AiOutlineAppstoreAdd size={48} />
+            <AiOutlineAppstoreAdd size={36} />
             <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
               Agregar Producto
             </h1>
@@ -75,7 +75,7 @@ const ProductList = () => {
           className="py-4 pl-2 my-4 bg-gray-900 text-white w-1/6 flex items-center justify-center rounded-xl shadow-md cursor-pointer"
           onClick={() => navigate("/products")}
         >
-          <FiFilter size={48} />
+          <FiFilter size={36} />
           <h1 className="hidden lg:flex text-md xl:text-lg pt-2 px-2 font-semibold ">
             Filtrar Producto
           </h1>
