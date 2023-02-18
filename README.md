@@ -70,7 +70,13 @@
     **Cliente**
       - (http://localhost:5173/)
       
+## Video Guía
       
+      
+
+https://user-images.githubusercontent.com/68347411/219903600-4d87a327-11a8-4dda-8a7c-ff6145a08c33.mp4
+
+
       
 ### En el cliente encontrará todas las funcionalidades propuestas en el enunciado
 
